@@ -10,28 +10,35 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
     import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
 
-    // 🔹 حطي هنا الـ Firebase Config بتاعك
+    // 🔹 Firebase Config الكامل
     const firebaseConfig = {
       apiKey: "AIzaSyBBdUkZFGYlE0jwXFqheH2Nov8awcL37D0",
       authDomain: "co-buddy-97.firebaseapp.com",
-      projectId: "co-buddy-97"
+      projectId: "co-buddy-97",
+      storageBucket: "co-buddy-97.appspot.com",
+      messagingSenderId: "87669703444",
+      appId: "1:87669703444:web:0948e8b815b13339ea3801"
     };
 
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
 
-    // 🔹 وظيفة تسجيل الدخول بجوجل
+    // 🔹 دالة تسجيل الدخول بجوجل
     window.googleLogin = function() {
       const provider = new GoogleAuthProvider();
 
       signInWithPopup(auth, provider)
         .then((result) => {
-          // 🔹 حطي هنا رابط صفحة الـ Dashboard
+          const user = result.user;
+          console.log("Signed in user:", user.displayName, user.email);
+
+          // 🔹 تحويل المستخدم بعد تسجيل الدخول
           window.location.href = "https://script.google.com/macros/s/AKfycbzs5-frJcl0cJX4h5wJikv3i1kJmqRy07mNTz29ONwG4q32bIba-JTknf_hUyD8Fkzl/exec";
         })
         .catch((error) => {
           alert("Login error: " + error.message);
+          console.error(error);
         });
     }
   </script>
@@ -51,6 +58,7 @@
       background-color: #4285F4;
       color: white;
       cursor: pointer;
+      transition: background-color 0.3s;
     }
     button:hover {
       background-color: #357ae8;
