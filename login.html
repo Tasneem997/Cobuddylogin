@@ -24,16 +24,20 @@
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
 
-    // 🔹 دالة تسجيل الدخول بجوجل
+    // 🔹 دالة تسجيل الدخول بجوجل مع تأكيد قبل التحويل
     window.googleLogin = function() {
       const provider = new GoogleAuthProvider();
 
       signInWithPopup(auth, provider)
         .then((result) => {
           const user = result.user;
+
+          // 🔹 عرض رسالة تأكيد للمستخدم
+          alert(`Hello ${user.displayName}! You are logged in with ${user.email}`);
+
           console.log("Signed in user:", user.displayName, user.email);
 
-          // 🔹 تحويل المستخدم بعد تسجيل الدخول
+          // 🔹 تحويل المستخدم بعد التأكيد
           window.location.href = "https://script.google.com/macros/s/AKfycbzs5-frJcl0cJX4h5wJikv3i1kJmqRy07mNTz29ONwG4q32bIba-JTknf_hUyD8Fkzl/exec";
         })
         .catch((error) => {
