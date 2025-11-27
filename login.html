@@ -4,11 +4,12 @@
   <meta charset="UTF-8" />
   <title>Co-Buddy Login</title>
 
-  <!-- Firebase JS SDK -->
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+  <!-- Firebase JS SDK (Modular 9+) -->
+  <script type="module">
+    // 🔹 استيراد الوظائف المطلوبة من Firebase
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+    import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
 
-  <script>
     // 🔹 حطي هنا الـ Firebase Config بتاعك
     const firebaseConfig = {
       apiKey: "AIzaSyBBdUkZFGYlE0jwXFqheH2Nov8awcL37D0",
@@ -17,13 +18,14 @@
     };
 
     // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
 
     // 🔹 وظيفة تسجيل الدخول بجوجل
-    function googleLogin() {
-      const provider = new firebase.auth.GoogleAuthProvider();
+    window.googleLogin = function() {
+      const provider = new GoogleAuthProvider();
 
-      firebase.auth().signInWithPopup(provider)
+      signInWithPopup(auth, provider)
         .then((result) => {
           // 🔹 حطي هنا رابط صفحة الـ Dashboard
           window.location.href = "https://script.google.com/macros/s/AKfycbzs5-frJcl0cJX4h5wJikv3i1kJmqRy07mNTz29ONwG4q32bIba-JTknf_hUyD8Fkzl/exec";
@@ -62,4 +64,3 @@
   <button onclick="googleLogin()">Sign in with Google</button>
 </body>
 </html>
-
