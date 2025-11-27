@@ -26,7 +26,7 @@
       firebase.auth().signInWithPopup(provider)
         .then((result) => {
           // 🔹 حطي هنا رابط صفحة الـ Dashboard
-          window.location.href = "https://sites.google.com/view/co-buddy/client-dashboard";
+          window.location.href = "https://script.google.com/macros/s/AKfycbzs5-frJcl0cJX4h5wJikv3i1kJmqRy07mNTz29ONwG4q32bIba-JTknf_hUyD8Fkzl/exec";
         })
         .catch((error) => {
           alert("Login error: " + error.message);
@@ -62,3 +62,4 @@
   <button onclick="googleLogin()">Sign in with Google</button>
 </body>
 </html>
+
